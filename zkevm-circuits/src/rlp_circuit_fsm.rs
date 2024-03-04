@@ -1803,6 +1803,7 @@ impl<F: Field> RlpCircuitConfig<F> {
             },
         );
 
+        /*
         meta.create_gate("Conditions for when key = (tx_id, format, depth, al_idx, sk_idx) stays the same", |meta| {
             let mut cb = BaseConstraintBuilder::default();
 
@@ -2217,6 +2218,8 @@ impl<F: Field> RlpCircuitConfig<F> {
                     .collect()
             },
         );
+
+         */
 
         debug_assert!(meta.degree() <= 9);
 
