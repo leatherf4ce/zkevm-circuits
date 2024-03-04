@@ -183,7 +183,7 @@ impl RlpFsmRomTable {
 #[derive(Clone, Copy, Debug)]
 pub struct RlpDecodingTable {
     /// Key1 (Id), concat of (tx_id, format, depth, al_idx, sk_idx)
-    pub id: Column<Advice>,
+    // pub id: Column<Advice>,
     /// Tx Id
     pub tx_id: Column<Advice>,
     /// Format
@@ -215,7 +215,7 @@ impl RlpDecodingTable {
     /// Construct the decoding table.
     pub fn construct<F: Field>(meta: &mut ConstraintSystem<F>) -> Self {
         Self {
-            id: meta.advice_column_in(SecondPhase),
+            // id: meta.advice_column_in(SecondPhase),
             tx_id: meta.advice_column(),
             format: meta.advice_column(),
             depth: meta.advice_column(),
@@ -2398,12 +2398,12 @@ impl<F: Field> RlpCircuitConfig<F> {
             || Value::known(F::from(stack_op_id_diff as u64)),
         )?;
 
-        region.assign_advice(
-            || "rlp_decoding_table.id",
-            self.rlp_decoding_table.id,
-            row,
-            || witness.rlp_decoding_table.id,
-        )?;
+        // region.assign_advice(
+        //     || "rlp_decoding_table.id",
+        //     self.rlp_decoding_table.id,
+        //     row,
+        //     || witness.rlp_decoding_table.id,
+        // )?;
         region.assign_advice(
             || "rlp_decoding_table.tx_id",
             self.rlp_decoding_table.tx_id,
