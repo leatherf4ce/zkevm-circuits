@@ -2023,7 +2023,6 @@ impl<F: Field> TxCircuitConfig<F> {
                 .collect()
         });
 
-        /*
         // lookup tx tag in RLP table for signing.
         meta.lookup_any("lookup tx tag in RLP Table for signing", |meta| {
             let enable = and::expr([
