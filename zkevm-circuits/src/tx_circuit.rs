@@ -1992,7 +1992,6 @@ impl<F: Field> TxCircuitConfig<F> {
         is_tx_type!(is_eip155, Eip155);
         is_tx_type!(is_l1_msg, L1Msg);
 
-        /*
         // lookup tx type in RLP table for L1Msg only
         meta.lookup_any("lookup tx type in RLP table", |meta| {
             let enable = and::expr([meta.query_fixed(q_enable, Rotation::cur()), is_l1_msg(meta)]);
@@ -2101,6 +2100,7 @@ impl<F: Field> TxCircuitConfig<F> {
             .collect()
         });
 
+        /*
         // lookup access list address in RLP table
         // 1. ensure field_rlc is correct
         // 2. ensure value of address is correct
