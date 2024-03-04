@@ -1854,7 +1854,6 @@ impl<F: Field> TxCircuitConfig<F> {
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
-        /*
         meta.lookup_any("lookup CallDataRLC in the calldata part", |meta| {
             let is_call_data = meta.query_advice(is_calldata, Rotation::cur());
             let section_rlc = meta.query_advice(section_rlc, Rotation::cur());
@@ -1989,7 +1988,6 @@ impl<F: Field> TxCircuitConfig<F> {
         /////////////////////////////////////////////////////////////////
         /////////////////    RLP table lookups     //////////////////////
         ///////////////// ////////////////////////////////////////////////
-        */
         is_tx_type!(is_pre_eip155, PreEip155);
         is_tx_type!(is_eip155, Eip155);
         is_tx_type!(is_l1_msg, L1Msg);
@@ -2025,6 +2023,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 .collect()
         });
 
+        /*
         // lookup tx tag in RLP table for signing.
         meta.lookup_any("lookup tx tag in RLP Table for signing", |meta| {
             let enable = and::expr([
