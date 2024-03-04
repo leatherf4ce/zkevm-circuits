@@ -1710,6 +1710,7 @@ impl<F: Field> RlpCircuitConfig<F> {
             meta.advice_column(),
         );
 
+        /*
         meta.create_gate(
             "Decoding table depth, operation and key change indicators",
             |meta| {
@@ -1802,6 +1803,7 @@ impl<F: Field> RlpCircuitConfig<F> {
                 cb.gate(meta.query_fixed(q_enabled, Rotation::cur()))
             },
         );
+         */
 
         /*
         meta.create_gate("Conditions for when key = (tx_id, format, depth, al_idx, sk_idx) stays the same", |meta| {
