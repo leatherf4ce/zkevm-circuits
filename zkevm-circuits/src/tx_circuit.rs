@@ -1992,6 +1992,7 @@ impl<F: Field> TxCircuitConfig<F> {
         is_tx_type!(is_eip155, Eip155);
         is_tx_type!(is_l1_msg, L1Msg);
 
+        log::debug!("before rlp table: num of lookups: {}", meta.lookups_map.len());
         // lookup tx type in RLP table for L1Msg only
         meta.lookup_any("lookup tx type in RLP table", |meta| {
             let enable = and::expr([meta.query_fixed(q_enable, Rotation::cur()), is_l1_msg(meta)]);
@@ -2058,6 +2059,7 @@ impl<F: Field> TxCircuitConfig<F> {
             .collect()
         });
 
+        /*
         // lookup tx tag in RLP table for hashing
         meta.lookup_any("lookup tx tag in RLP Table for hashing", |meta| {
             let rlp_tag = meta.query_advice(rlp_tag, Rotation::cur());
@@ -2099,6 +2101,8 @@ impl<F: Field> TxCircuitConfig<F> {
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
+         */
+        log::debug!("after rlp table: num of lookups: {}", meta.lookups_map.len());
 
         /*
         // lookup access list address in RLP table
