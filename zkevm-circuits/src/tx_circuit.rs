@@ -1992,38 +1992,6 @@ impl<F: Field> TxCircuitConfig<F> {
         is_tx_type!(is_eip155, Eip155);
         is_tx_type!(is_l1_msg, L1Msg);
 
-        log::debug!("before rlp table: num of lookups: {}", meta.lookups_map.len());
-        // lookup tx type in RLP table for L1Msg only
-        meta.lookup_any("lookup tx type in RLP table", |meta| {
-            let enable = and::expr([meta.query_fixed(q_enable, Rotation::cur()), is_l1_msg(meta)]);
-            let hash_format = L1MsgHash.expr();
-            let tag_value = 0x7E.expr();
-            let tag_bytes_rlc = 0x7E.expr();
-            let tag_length = 1.expr();
-
-            let input_exprs = vec![
-                1.expr(), // q_enable = true
-                meta.query_advice(tx_table.tx_id, Rotation::cur()),
-                hash_format,
-                RLPTxType.expr(),
-                tag_value,
-                tag_bytes_rlc,
-                tag_length,
-                1.expr(), // is_output = true
-                0.expr(), // is_none = false
-                // 0.expr(), // access_list_idx
-                // 0.expr(), // storage_key_idx
-            ];
-            // assert_eq!(input_exprs.len(), rlp_table.table_exprs(meta).len());
-
-            input_exprs
-                .into_iter()
-                .zip(rlp_table.table_exprs(meta))
-                .map(|(input, table)| (enable.expr() * input, table))
-                .collect()
-        });
-        meta.clone().chunk_lookups().lookups().len();
-
         // lookup tx tag in RLP table for signing.
         meta.lookup_any("lookup tx tag in RLP Table for signing", |meta| {
             let enable = and::expr([
@@ -2051,14 +2019,45 @@ impl<F: Field> TxCircuitConfig<F> {
                 meta.query_advice(tx_value_length, Rotation::cur()),
                 1.expr(), // is_output = true
                 is_none,
-                // 0.expr(), // access_list_idx
-                // 0.expr(), // storage_key_idx
+                0.expr(), // access_list_idx
+                0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip(rlp_table.table_exprs(meta))
+            .zip_eq(rlp_table.table_exprs(meta))
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
+
+        // lookup tx type in RLP table for L1Msg only
+        meta.lookup_any("lookup tx type in RLP table", |meta| {
+            let enable = and::expr([meta.query_fixed(q_enable, Rotation::cur()), is_l1_msg(meta)]);
+            let hash_format = L1MsgHash.expr();
+            let tag_value = 0x7E.expr();
+            let tag_bytes_rlc = 0x7E.expr();
+            let tag_length = 1.expr();
+
+            let input_exprs = vec![
+                1.expr(), // q_enable = true
+                meta.query_advice(tx_table.tx_id, Rotation::cur()),
+                hash_format,
+                RLPTxType.expr(),
+                tag_value,
+                tag_bytes_rlc,
+                tag_length,
+                1.expr(), // is_output = true
+                0.expr(), // is_none = false
+                0.expr(), // access_list_idx
+                0.expr(), // storage_key_idx
+            ];
+            assert_eq!(input_exprs.len(), rlp_table.table_exprs(meta).len());
+
+            input_exprs
+                .into_iter()
+                .zip_eq(rlp_table.table_exprs(meta))
+                .map(|(input, table)| (enable.expr() * input, table))
+                .collect()
+        });
+
         /*
         // lookup tx tag in RLP table for hashing
         meta.lookup_any("lookup tx tag in RLP Table for hashing", |meta| {
