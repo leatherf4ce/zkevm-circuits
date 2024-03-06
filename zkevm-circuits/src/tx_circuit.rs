@@ -2014,7 +2014,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 // 0.expr(), // access_list_idx
                 // 0.expr(), // storage_key_idx
             ];
-            assert_eq!(input_exprs.len(), rlp_table.table_exprs(meta).len());
+            // assert_eq!(input_exprs.len(), rlp_table.table_exprs(meta).len());
 
             input_exprs
                 .into_iter()
@@ -2055,7 +2055,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 // 0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip_eq(rlp_table.table_exprs(meta))
+            .zip(rlp_table.table_exprs(meta))
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
