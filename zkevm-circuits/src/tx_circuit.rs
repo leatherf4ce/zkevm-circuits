@@ -2004,9 +2004,9 @@ impl<F: Field> TxCircuitConfig<F> {
             let rlp_tag = meta.query_advice(rlp_tag, Rotation::cur());
             let is_none = meta.query_advice(is_none, Rotation::cur());
             let sign_format = is_pre_eip155(meta) * TxSignPreEip155.expr()
-                + is_eip155(meta) * TxSignEip155.expr()
-                + meta.query_advice(is_eip2930, Rotation::cur()) * TxSignEip2930.expr()
-                + meta.query_advice(is_eip1559, Rotation::cur()) * TxSignEip1559.expr();
+                + is_eip155(meta) * TxSignEip155.expr();
+                // + meta.query_advice(is_eip2930, Rotation::cur()) * TxSignEip2930.expr()
+                // + meta.query_advice(is_eip1559, Rotation::cur()) * TxSignEip1559.expr();
 
             // q_enable, tx_id, format, rlp_tag, tag_value, is_output, is_none
             vec![
