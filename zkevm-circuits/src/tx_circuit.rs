@@ -2028,6 +2028,7 @@ impl<F: Field> TxCircuitConfig<F> {
             .collect()
         });
 
+        /*
         // lookup tx type in RLP table for L1Msg only
         meta.lookup_any("lookup tx type in RLP table", |meta| {
             let enable = and::expr([meta.query_fixed(q_enable, Rotation::cur()), is_l1_msg(meta)]);
@@ -2057,7 +2058,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 .map(|(input, table)| (enable.expr() * input, table))
                 .collect()
         });
-
+        */
         /*
         // lookup tx tag in RLP table for hashing
         meta.lookup_any("lookup tx tag in RLP Table for hashing", |meta| {
