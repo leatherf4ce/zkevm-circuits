@@ -2061,7 +2061,6 @@ impl<F: Field> TxCircuitConfig<F> {
                 .collect()
         });
         */
-        /*
         // lookup tx tag in RLP table for hashing
         meta.lookup_any("lookup tx tag in RLP Table for hashing", |meta| {
             let rlp_tag = meta.query_advice(rlp_tag, Rotation::cur());
@@ -2103,8 +2102,6 @@ impl<F: Field> TxCircuitConfig<F> {
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
-         */
-        log::debug!("after rlp table: num of lookups: {}", meta.lookups_map.len());
 
         /*
         // lookup access list address in RLP table
