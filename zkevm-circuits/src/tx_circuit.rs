@@ -2077,6 +2077,7 @@ impl<F: Field> TxCircuitConfig<F> {
                     ),
                 ]),
             ]);
+            let enable = false.expr();
             let is_none = meta.query_advice(is_none, Rotation::cur());
             let hash_format = is_pre_eip155(meta) * TxHashPreEip155.expr()
                 + is_eip155(meta) * TxHashEip155.expr()
