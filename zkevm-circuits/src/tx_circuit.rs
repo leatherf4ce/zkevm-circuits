@@ -1992,6 +1992,7 @@ impl<F: Field> TxCircuitConfig<F> {
         is_tx_type!(is_eip155, Eip155);
         is_tx_type!(is_l1_msg, L1Msg);
 
+        /*
         // lookup tx tag in RLP table for signing.
         meta.lookup_any("lookup tx tag in RLP Table for signing", |meta| {
             let enable = and::expr([
@@ -2027,6 +2028,7 @@ impl<F: Field> TxCircuitConfig<F> {
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
+         */
 
         /*
         // lookup tx type in RLP table for L1Msg only
