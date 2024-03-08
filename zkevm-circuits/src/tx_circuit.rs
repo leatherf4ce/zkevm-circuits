@@ -2067,7 +2067,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip(rlp_table.table_exprs(meta))
+            .zip(table_exprs.into_iter())
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
@@ -2123,7 +2123,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip(table_exprs.iter())
+            .zip(table_exprs.into_iter())
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
