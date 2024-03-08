@@ -2022,7 +2022,6 @@ impl<F: Field> TxCircuitConfig<F> {
                 .collect()
         });
 
-        /*
         // lookup tx tag in RLP table for signing.
         meta.lookup_any("lookup tx tag in RLP Table for signing", |meta| {
             let enable = and::expr([
@@ -2048,11 +2047,11 @@ impl<F: Field> TxCircuitConfig<F> {
                 rlp_table_exprs[3].clone(),
                 // rlp_table_exprs[4].clone(),
                 // rlp_table_exprs[5].clone(),
-                rlp_table_exprs[6].clone(),
-                rlp_table_exprs[7].clone(),
-                rlp_table_exprs[8].clone(),
-                rlp_table_exprs[9].clone(),
-                rlp_table_exprs[10].clone(),
+                // rlp_table_exprs[6].clone(),
+                // rlp_table_exprs[7].clone(),
+                // rlp_table_exprs[8].clone(),
+                // rlp_table_exprs[9].clone(),
+                // rlp_table_exprs[10].clone(),
             ];
             vec![
                 1.expr(), // q_enable = true
@@ -2061,11 +2060,11 @@ impl<F: Field> TxCircuitConfig<F> {
                 rlp_tag,
                 // meta.query_advice(tx_table.value, Rotation::cur()),
                 // meta.query_advice(tx_value_rlc, Rotation::cur()),
-                meta.query_advice(tx_value_length, Rotation::cur()),
-                1.expr(), // is_output = true
-                is_none,
-                0.expr(), // access_list_idx
-                0.expr(), // storage_key_idx
+                // meta.query_advice(tx_value_length, Rotation::cur()),
+                // 1.expr(), // is_output = true
+                // is_none,
+                // 0.expr(), // access_list_idx
+                // 0.expr(), // storage_key_idx
             ]
             .into_iter()
             .zip(table_exprs.into_iter())
@@ -2104,11 +2103,11 @@ impl<F: Field> TxCircuitConfig<F> {
                 rlp_table_exprs[3].clone(),
                 // rlp_table_exprs[4].clone(),
                 // rlp_table_exprs[5].clone(),
-                rlp_table_exprs[6].clone(),
-                rlp_table_exprs[7].clone(),
-                rlp_table_exprs[8].clone(),
-                rlp_table_exprs[9].clone(),
-                rlp_table_exprs[10].clone(),
+                // rlp_table_exprs[6].clone(),
+                // rlp_table_exprs[7].clone(),
+                // rlp_table_exprs[8].clone(),
+                // rlp_table_exprs[9].clone(),
+                // rlp_table_exprs[10].clone(),
             ];
             vec![
                 1.expr(), // q_enable = true
@@ -2117,18 +2116,17 @@ impl<F: Field> TxCircuitConfig<F> {
                 rlp_tag,
                 // meta.query_advice(tx_table.value, Rotation::cur()),
                 // meta.query_advice(tx_value_rlc, Rotation::cur()),
-                meta.query_advice(tx_value_length, Rotation::cur()),
-                1.expr(), // is_output = true
-                is_none,
-                0.expr(), // access_list_idx
-                0.expr(), // storage_key_idx
+                // meta.query_advice(tx_value_length, Rotation::cur()),
+                // 1.expr(), // is_output = true
+                // is_none,
+                // 0.expr(), // access_list_idx
+                // 0.expr(), // storage_key_idx
             ]
             .into_iter()
             .zip(table_exprs.into_iter())
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
-         */
 
         // lookup access list address in RLP table
         // 1. ensure field_rlc is correct
