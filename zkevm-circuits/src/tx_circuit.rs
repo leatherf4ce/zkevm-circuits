@@ -2041,17 +2041,17 @@ impl<F: Field> TxCircuitConfig<F> {
             // q_enable, tx_id, format, rlp_tag, tag_value, is_output, is_none
             let rlp_table_exprs = rlp_table.table_exprs(meta);
             let table_exprs = vec![
-                rlp_table_exprs[0],
-                rlp_table_exprs[1],
-                rlp_table_exprs[2],
-                rlp_table_exprs[3],
-                // rlp_table_exprs[4],
-                // rlp_table_exprs[5],
-                rlp_table_exprs[6],
-                rlp_table_exprs[7],
-                rlp_table_exprs[8],
-                rlp_table_exprs[9],
-                rlp_table_exprs[10],
+                rlp_table_exprs[0].clone(),
+                rlp_table_exprs[1].clone(),
+                rlp_table_exprs[2].clone(),
+                rlp_table_exprs[3].clone(),
+                // rlp_table_exprs[4].clone(),
+                // rlp_table_exprs[5].clone(),
+                rlp_table_exprs[6].clone(),
+                rlp_table_exprs[7].clone(),
+                rlp_table_exprs[8].clone(),
+                rlp_table_exprs[9].clone(),
+                rlp_table_exprs[10].clone(),
             ];
             vec![
                 1.expr(), // q_enable = true
@@ -2097,17 +2097,17 @@ impl<F: Field> TxCircuitConfig<F> {
 
             let rlp_table_exprs = rlp_table.table_exprs(meta);
             let table_exprs = vec![
-                rlp_table_exprs[0],
-                rlp_table_exprs[1],
-                rlp_table_exprs[2],
-                rlp_table_exprs[3],
-                // rlp_table_exprs[4],
-                // rlp_table_exprs[5],
-                rlp_table_exprs[6],
-                rlp_table_exprs[7],
-                rlp_table_exprs[8],
-                rlp_table_exprs[9],
-                rlp_table_exprs[10],
+                rlp_table_exprs[0].clone(),
+                rlp_table_exprs[1].clone(),
+                rlp_table_exprs[2].clone(),
+                rlp_table_exprs[3].clone(),
+                // rlp_table_exprs[4].clone(),
+                // rlp_table_exprs[5].clone(),
+                rlp_table_exprs[6].clone(),
+                rlp_table_exprs[7].clone(),
+                rlp_table_exprs[8].clone(),
+                rlp_table_exprs[9].clone(),
+                rlp_table_exprs[10].clone(),
             ];
             vec![
                 1.expr(), // q_enable = true
