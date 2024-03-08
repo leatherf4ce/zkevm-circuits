@@ -2039,13 +2039,27 @@ impl<F: Field> TxCircuitConfig<F> {
                 + meta.query_advice(is_eip1559, Rotation::cur()) * TxSignEip1559.expr();
 
             // q_enable, tx_id, format, rlp_tag, tag_value, is_output, is_none
+            let rlp_table_exprs = rlp_table.table_exprs(meta);
+            let table_exprs = vec![
+                rlp_table_exprs[0],
+                rlp_table_exprs[1],
+                rlp_table_exprs[2],
+                rlp_table_exprs[3],
+                // rlp_table_exprs[4],
+                // rlp_table_exprs[5],
+                rlp_table_exprs[6],
+                rlp_table_exprs[7],
+                rlp_table_exprs[8],
+                rlp_table_exprs[9],
+                rlp_table_exprs[10],
+            ];
             vec![
                 1.expr(), // q_enable = true
                 meta.query_advice(tx_table.tx_id, Rotation::cur()),
                 sign_format,
                 rlp_tag,
-                meta.query_advice(tx_table.value, Rotation::cur()),
-                meta.query_advice(tx_value_rlc, Rotation::cur()),
+                // meta.query_advice(tx_table.value, Rotation::cur()),
+                // meta.query_advice(tx_value_rlc, Rotation::cur()),
                 meta.query_advice(tx_value_length, Rotation::cur()),
                 1.expr(), // is_output = true
                 is_none,
@@ -2053,7 +2067,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip_eq(rlp_table.table_exprs(meta))
+            .zip(rlp_table.table_exprs(meta))
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
@@ -2081,13 +2095,27 @@ impl<F: Field> TxCircuitConfig<F> {
                 + meta.query_advice(is_eip2930, Rotation::cur()) * TxHashEip2930.expr()
                 + meta.query_advice(is_eip1559, Rotation::cur()) * TxHashEip1559.expr();
 
+            let rlp_table_exprs = rlp_table.table_exprs(meta);
+            let table_exprs = vec![
+                rlp_table_exprs[0],
+                rlp_table_exprs[1],
+                rlp_table_exprs[2],
+                rlp_table_exprs[3],
+                // rlp_table_exprs[4],
+                // rlp_table_exprs[5],
+                rlp_table_exprs[6],
+                rlp_table_exprs[7],
+                rlp_table_exprs[8],
+                rlp_table_exprs[9],
+                rlp_table_exprs[10],
+            ];
             vec![
                 1.expr(), // q_enable = true
                 meta.query_advice(tx_table.tx_id, Rotation::cur()),
                 hash_format,
                 rlp_tag,
-                meta.query_advice(tx_table.value, Rotation::cur()),
-                meta.query_advice(tx_value_rlc, Rotation::cur()),
+                // meta.query_advice(tx_table.value, Rotation::cur()),
+                // meta.query_advice(tx_value_rlc, Rotation::cur()),
                 meta.query_advice(tx_value_length, Rotation::cur()),
                 1.expr(), // is_output = true
                 is_none,
@@ -2095,7 +2123,7 @@ impl<F: Field> TxCircuitConfig<F> {
                 0.expr(), // storage_key_idx
             ]
             .into_iter()
-            .zip_eq(rlp_table.table_exprs(meta))
+            .zip(table_exprs.iter())
             .map(|(arg, table)| (enable.clone() * arg, table))
             .collect()
         });
